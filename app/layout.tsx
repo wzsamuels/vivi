@@ -1,16 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Edu_AU_VIC_WA_NT_Hand, Petit_Formal_Script } from "next/font/google";
+import { Petit_Formal_Script } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const eduHand = Petit_Formal_Script({
   variable: "--font-edu-hand",
