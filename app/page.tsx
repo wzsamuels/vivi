@@ -17,7 +17,7 @@ export default function Home() {
       </div>
       <div className='p-4 m-4 w-full'>
         <div className='flex items-center justify-center'>
-        <Image src={bannerImage} alt=''/>
+        <Image src={bannerImage} alt='' className='rounded-xl'/>
         </div>
       </div>
       <div className='m-4'>
