@@ -23,7 +23,7 @@ export default function Home() {
       <div className='m-4'>
         <div className='relative w-full overflow-hidden pt-[66%]'>
           <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&src=NDlkNDk2NDc4NzU5NGNjNDA3MDYyMzAxNDNmZWQ5MWFlZTM3OWE2YzEwYmEzODk4NWRiZWRkMTJlNTEyOTRmNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23B39DDB&color=%237CB342"
-            className='absolute top-0 left-0 bottom-0 right-0 w-full h-full'
+            className='absolute top-0 left-0 bottom-0 right-0 w-full h-full rounded-xl'
             style={{border:"solid 1px #777"}} width="800" height="600" frameBorder="0" scrolling="no">
 
           </iframe>
