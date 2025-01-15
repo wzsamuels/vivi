@@ -27,8 +27,7 @@ export default async function Calendar() {
   const calendarId = process.env.CALENDAR_ID;
   const apiKey = process.env.CALENDAR_API_KEY;
 
-  // Construct the API endpoint
-  const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}&timeMin=${timeMin}&singleEvents=true&orderBy=startTime`;
+
 
   if (!calendarId || !apiKey) {
     return (
@@ -41,6 +40,14 @@ export default async function Calendar() {
       </main>
     );
   }
+
+  // Calculate timeMin for "today at midnight"
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const timeMin = now.toISOString();
+
+  // Construct the API endpoint
+  const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}&timeMin=${timeMin}&singleEvents=true&orderBy=startTime`;
 
     // Fetch data on the server
   let events: GCalEvent[] = [];
@@ -64,24 +71,28 @@ export default async function Calendar() {
     console.error("Error fetching Google Calendar events:", error);
   }
 
-  // Helper to format either dateTime or date using the same toLocaleString
+ // Helper to format events:
+  // - If dateTime is present, show full date/time
+  // - If date is present (all-day event), show just the date
   const formatDate = (dateTime?: string, date?: string) => {
     if (dateTime) {
       return new Date(dateTime).toLocaleString();
     } else if (date) {
-      return new Date(date).toLocaleString();
+      // All-day events only have `date`
+      return new Date(date).toLocaleDateString();
     } else {
       return "N/A";
     }
   };
-
   return (
     <div>
-      <h3 className="text-2xl my-4 md:mx-4">Upcoming Events</h3>
+      <h3 className="text-2xl my-4 md:mx-4 text-center">Upcoming Events</h3>
       {events.length === 0 ? (
         <p>No events found or unable to fetch events.</p>
       ) : (
-        <ul>
+        <div className="w-full">
+        <div className="flex justify-center items-center">
+          <ul className="w-[600px]">
           {events.map((event) => (
             <li key={event.id} className="my-4 md:mx-4">
               <h4>
@@ -93,6 +104,8 @@ export default async function Calendar() {
             </li>
           ))}
         </ul>
+        </div>
+        </div>
       )}
     </div>
   );
