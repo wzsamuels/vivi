@@ -55,8 +55,7 @@ export default async function Calendar() {
   try {
     const res = await fetch(url, {
       // For example, skip caching and always fetch fresh data:
-      // cache: "no-store",
-
+      cache: "no-store",
       // Or revalidate after some seconds (Incremental Static Regeneration):
       // next: { revalidate: 60 },
     });
