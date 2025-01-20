@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       <div className='text-center'>
-        <h1 className={' text-5xl m-4'}>Ladies Golf Events</h1>
+        <h1 className={' text-5xl m-4'}>Heritage Women's Golf</h1>
         <h2 className='text-3xl m-4'>@</h2>
         <h2 className='text-3xl'>Heritage Golf Course</h2>
       </div>

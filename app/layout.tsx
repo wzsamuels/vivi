@@ -9,7 +9,7 @@ const eduHand = Petit_Formal_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Lady Golf Events"
+  title: "Heritage Women's Golf"
 };
 
 export default function RootLayout({
