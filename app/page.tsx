@@ -22,9 +22,10 @@ export default function Home() {
       <div className='my-4 w-full'>
         <div className='flex items-center justify-center '>
           <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FNew_York&src=NDlkNDk2NDc4NzU5NGNjNDA3MDYyMzAxNDNmZWQ5MWFlZTM3OWE2YzEwYmEzODk4NWRiZWRkMTJlNTEyOTRmNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23B39DDB&color=%237CB342"
-            className='w-full  rounded-xl max-w-6xl'
-            style={{border:"solid 1px #777"}} width="800" height="600" frameBorder="0" scrolling="no">
-
+            className='w-full rounded-xl max-w-6xl'
+            style={{border:"solid 1px #777"}}
+            height="600"
+            >
           </iframe>
         </div>
       </div>
