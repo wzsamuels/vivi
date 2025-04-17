@@ -1,5 +1,3 @@
-
-
 // Define interfaces for the Google Calendar API response
 interface GCalEvent {
   kind: string;
@@ -8,6 +6,7 @@ interface GCalEvent {
   description?: string;
   start?: {
     dateTime?: string;
+    timeZone?: string;
     date?: string;
   };
   end?: {
@@ -26,8 +25,6 @@ export default async function Calendar() {
   // Read from environment variables
   const calendarId = process.env.CALENDAR_ID;
   const apiKey = process.env.CALENDAR_API_KEY;
-
-
 
   if (!calendarId || !apiKey) {
     return (
@@ -73,16 +70,30 @@ export default async function Calendar() {
  // Helper to format events:
   // - If dateTime is present, show full date/time
   // - If date is present (all-day event), show just the date
-  const formatDate = (dateTime?: string, date?: string) => {
-    if (dateTime) {
-      return new Date(dateTime).toLocaleString();
-    } else if (date) {
+  const formatDate = (event : GCalEvent) => {
+    if (event.start?.dateTime) {
+      const dt = new Date(event.start.dateTime);
+    // If the API didn’t give you a timeZone, fall back to your calendar default:
+    const tz = event.start.timeZone ?? "America/New_York";
+
+    const formatted = new Intl.DateTimeFormat("en-US", {
+      timeZone: tz,
+      year:   "numeric",
+      month:  "numeric",
+      day:    "numeric",
+      hour:   "numeric",
+      minute: "2-digit",
+    }).format(dt);
+
+    return formatted; 
+    } else if (event.start?.date) {
       // All-day events only have `date`
-      return new Date(date).toLocaleDateString();
+      return new Date(event.start?.date).toLocaleDateString();
     } else {
       return "N/A";
     }
   };
+  
   return (
     <div>
       <h3 className="text-2xl my-4 md:mx-4 text-center">Upcoming Events</h3>
@@ -91,14 +102,14 @@ export default async function Calendar() {
       ) : (
         <div className="w-full">
         <div className="flex justify-center items-center">
-          <ul className="w-[600px]">
+          <ul className="w-full max-w-md px-4">
           {events.map((event) => (
             <li key={event.id} className="my-4 md:mx-4">
               <h4>
                 <span className="font-bold">{event.summary}
                   </span> - <span>
-                  {formatDate(event.start?.dateTime, event.start?.date)}</span>
-              {event.description && <p className="my-2">{event.description}</p>}
+                  {formatDate(event)}</span>
+                  {event.description && <p className="my-2">{event.description}</p>}
               </h4>
             </li>
           ))}
